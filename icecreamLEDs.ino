@@ -15,9 +15,11 @@ void setup() {
   pixels.clear();
   pinMode(buttonPin, INPUT);
   colorWipe(pixels.Color(0,140,255));
+  //on turn-on, the LEDs swirl to the first mode, Strawberry
 }
 
 void loop() {
+  //check if the button was pressed, if it was, go to changeLEDMode()
   buttonState = digitalRead(buttonPin);
   if (buttonState != lastButtonState) {
     if (buttonState == HIGH) {
@@ -32,6 +34,11 @@ void loop() {
 }
 
 void changeLEDMode(){
+  /*changes the LED mode to the next in the list (1. strawberry, 2. vanilla, 3. chocolate
+    4. strawberry vanilla swirl, 5. chocolate strawberry, 6. vanilla chocolate swirl, and 
+    7. neopolitan. If you'd like to change the colors, change the pixels.Color input on 
+    any of the modes below. I.e. you can change "colorWipe(pixels.Color(0,140,255))" to be 
+    colorWipe(pixels.Color(0,0,255)) if you want that mode to light up blue.)*/
   if(currentMode==6){
     currentMode = 0;
   }
@@ -69,6 +76,7 @@ void changeLEDMode(){
 }
 
 void colorWipe(uint32_t color) {
+  //swirls a single color around the ice cream
   for(int i=0; i<pixels.numPixels(); i++) { 
     pixels.setPixelColor(i, color);
     pixels.show();
@@ -76,6 +84,7 @@ void colorWipe(uint32_t color) {
   }
 }
 void colorWipeSwirl(uint32_t color1, uint32_t color2) {
+  //swirls two colors around the ice cream
   for(int i=0; i<8; i++) { 
     pixels.setPixelColor(i, color1); 
     pixels.show();
@@ -98,6 +107,7 @@ void colorWipeSwirl(uint32_t color1, uint32_t color2) {
   }
 }
 void neopolitan(uint32_t color1, uint32_t color2, uint32_t color3) {
+   //swirls three colors around the ice cream
   for(int i=0; i<5; i++) { 
     pixels.setPixelColor(i, color1); 
     pixels.show();
